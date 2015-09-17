@@ -33,8 +33,8 @@
 
     <md-content style="background:transparent;">
         <md-card ng-repeat="post in posts">
-            <div style="border-radius: 2px; width:100%;height:580px;background:url({{post.img}}) center center no-repeat;background-size:cover;"
-                 ng-if="post.img && post.img!=null && post.img != 'null' && post.img !='' && post.img.indexOf('http') == 0"></div>
+            <div style="border-radius: 2px; width:100%;height:580px;background:url({{post.img}}?imageView2/2/w/800/q/60) center center no-repeat;background-size:cover;"
+                 ng-if="post.img && post.img != 'null' && post.img !='' && post.img.indexOf('http') == 0"></div>
             <md-card-content>
                 <p>{{post.text}}</p>
 
