@@ -1,0 +1,50 @@
+form {
+    max-width: 600px;
+}
+
+.container {
+    padding: 44px;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.full-width .mdl-textfield {
+    width: 100%;
+}
+
+.align-right {
+    text-align: right;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+#uploaderBtn {
+    right: 0;
+}
+
+.timestamp {
+    font-size: 12px;
+    color: #888;
+}
+
+md-card {
+    margin-bottom: 20px;
+}
+
+.background {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: url(./bg.jpg) center center no-repeat;
+    background-size: cover;
+    -webkit-filter: blur(10px);
+}

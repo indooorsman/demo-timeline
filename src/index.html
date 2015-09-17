@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the timeline for _</title>
+    <link rel="stylesheet" href="./libs/angular/angular-material.min.css"/>
+    <link rel="stylesheet" href="./libs/mdl/material-icons.css"/>
+    <link rel="stylesheet" href="./styles/index.css"/>
+
+</head>
+<body style="visibility: hidden">
+<div class="container" ng-controller="PostCtrl">
+    <form ng-submit="addPost()" layout="column" layout-padding="10px" style="background: rgba(255,255,255,.8);border-radius: 5px;margin-bottom: 10px;">
+        <md-input-container>
+            <label for="desc">Text</label>
+            <input type="text" id="desc" ng-model="text"/>
+        </md-input-container>
+
+        <div layout id="uploader">
+            <md-input-container flex>
+                <label for="img">Image</label>
+                <input type="text" id="img" ng-model="img"/>
+            </md-input-container>
+            <md-button id="uploaderBtn" class="md-raised md-primary">选择文件</md-button>
+        </div>
+
+        <div class="align-right">
+            <md-button class="md-raised md-primary">Add</md-button>
+        </div>
+    </form>
+
+    <md-content style="background:transparent;">
+        <md-card ng-repeat="post in posts">
+            <img class="md-card-image" ng-src="{{post.img}}"
+                 ng-if="post.img && post.img!=null && post.img != 'null' && post.img !='' && post.img.indexOf('http') == 0"/>
+            <md-card-content>
+                <p>{{post.text}}</p>
+
+                <p class="timestamp">{{post.time | date:'yyyy-MM-dd H:mm:ss'}}</p>
+            </md-card-content>
+        </md-card>
+    </md-content>
+
+    <!--<ul>
+        <li ng-repeat="post in posts">
+            [<span class="timestamp">{{post.time | date:'yyyy-MM-dd H:mm:ss'}}</span>] {{post.text}}
+            <div class="media-holder"
+                 ng-if="post.img && post.img!=null && post.img != 'null' && post.img !='' && post.img.indexOf('http') == 0">
+                <img width="100" ng-src="{{post.img}}"/>
+            </div>
+        </li>
+        <div ng-show="loading" class="mdl-spinner mdl-js-spinner is-active"></div>
+    </ul>-->
+</div>
+<div class="background"></div>
+<script src="./libs/CryptoJS.js"></script>
+<script src="https://cdn.wilddog.com/js/client/current/wilddog.js"></script>
+<script src="./libs/plupload.full.min.js"></script>
+<script src="./libs/qiniu.js"></script>
+<script src="./libs/angular/angular.min.js"></script>
+<script src="./libs/angular/angular-aria.min.js"></script>
+<script src="./libs/angular/angular-animate.min.js"></script>
+<script src="./libs/angular/angular-material.min.js"></script>
+<script src="./scripts/index.js"></script>
+<script src="./scripts/controllers/index.js"></script>
+<script src="./scripts/services/index.js"></script>
+
+</body>
+</html>
