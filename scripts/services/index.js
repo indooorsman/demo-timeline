@@ -192,6 +192,7 @@ angular.module('timelineApp.services', [])
         drop_element: 'uploader',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
         chunk_size: '4mb',                //分块上传时，每片的体积
         auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传,
+        multi_selection: false,
         //x_vars : {
         //    自定义变量，参考http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html
         //    'time' : function(up,file) {
@@ -214,6 +215,7 @@ angular.module('timelineApp.services', [])
           },
           'BeforeUpload': function (up, file) {
             // 每个文件上传前,处理相关的事情
+            $rootScope.$broadcast('beforeUpload');
             up.setOption("uptoken", self.getUpToken());
           },
           'UploadProgress': function (up, file) {

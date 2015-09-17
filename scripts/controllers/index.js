@@ -1,6 +1,5 @@
 angular.module('timelineApp.controllers', [])
     .controller('PostCtrl', ['$scope', '$timeout', 'WildDog', 'QiNiu', function ($scope, $timeout, WildDog, qiniu) {
-      $scope.loading = true;
       var postRef = WildDog.getDataRef('posts');
 
       $scope.text = '';
@@ -11,7 +10,7 @@ angular.module('timelineApp.controllers', [])
       postRef.orderByChild('time').on('value', function (ss) {
         var array = [];
         var val = ss.val();
-        for(var k in val) {
+        for (var k in val) {
           if (val.hasOwnProperty(k)) {
             array.push(val[k]);
           }
@@ -19,7 +18,6 @@ angular.module('timelineApp.controllers', [])
         console.log(array);
         $timeout(function () {
           $scope.posts = array.reverse();
-          $scope.loading = false;
         }, 0);
       });
 
@@ -38,9 +36,16 @@ angular.module('timelineApp.controllers', [])
         $scope.img = '';
       };
 
+      $scope.$on('beforeUpload', function () {
+        $scope.$apply(function() {
+          $scope.uploading = true;
+        });
+      });
+
       $scope.$on('upload', function (e, data) {
-        $scope.$apply(function(){
+        $scope.$apply(function () {
           $scope.img = data;
+          $scope.uploading = false;
         });
       });
     }]);

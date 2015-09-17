@@ -23,7 +23,7 @@
                 <label for="img">Image</label>
                 <input type="text" id="img" ng-model="img"/>
             </md-input-container>
-            <md-button id="uploaderBtn" class="md-raised md-primary">选择文件</md-button>
+            <md-button id="uploaderBtn" class="md-raised md-primary" ng-disabled="uploading">{{uploading?'上传中...':'选择文件'}}</md-button>
         </div>
 
         <div class="align-right">
