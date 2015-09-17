@@ -4,7 +4,7 @@ form {
 
 .container {
     padding: 44px;
-    max-width: 600px;
+    width: 600px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
