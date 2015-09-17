@@ -48,3 +48,17 @@ md-card {
     background-size: cover;
     -webkit-filter: blur(10px);
 }
+
+a.github {
+    position: fixed;
+    top: 50px;
+    right: -50px;
+    background: rgb(63,81,181);
+    color: #fff!important;
+    display: block;
+    padding: 10px 35px;
+    font-size: 16px;
+    z-index: 3;
+    text-decoration: none;
+    -webkit-transform: rotate(45deg);
+}
