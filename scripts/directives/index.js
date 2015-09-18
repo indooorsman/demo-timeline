@@ -13,7 +13,7 @@ angular.module('timelineApp.directives', [])
               'background-color': '#cccccc',
               'padding': '20px 0'
             });
-            ele.html('图片加载出错 :(')
+            ele.html('图片加载出错 :(');
           });
         }
       }
