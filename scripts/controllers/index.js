@@ -40,6 +40,14 @@ angular.module('timelineApp.controllers', [])
         }
       });
 
+      $scope.logout = function() {
+        postRef.unAuth(function() {
+          $timeout(function(){
+            $scope.login = false;
+          }, 0)
+        });
+      };
+
       $scope.authWithQQ = function () {
         postRef.authWithOAuthRedirect('qq', function (err, data) {
           if (err) {
