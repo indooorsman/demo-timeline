@@ -12,7 +12,7 @@
 </head>
 <body style="visibility: hidden">
 <div class="container" ng-controller="PostCtrl">
-    <div ng-if="!login">
+    <div ng-show="!login">
         <md-content>
             <md-card>
                 <md-card-content>
@@ -27,9 +27,9 @@
             </md-card>
         </md-content>
     </div>
-    <div ng-if="login">
+    <div ng-show="login">
 
-        <form ng-submit="addPost()" layout="column" layout-padding="10px"
+        <ng-form layout="column" layout-padding="10px"
               style="background: rgba(255,255,255,.8);border-radius: 5px;margin-bottom: 10px;">
             <md-input-container>
                 <label for="desc">Text</label>
@@ -47,9 +47,9 @@
             </div>
 
             <div class="align-right">
-                <md-button class="md-raised md-primary">添加</md-button>
+                <md-button ng-click="addPost()" class="md-raised md-primary">添加</md-button>
             </div>
-        </form>
+        </ng-form>
 
         <md-content>
             <md-card ng-repeat="post in posts">

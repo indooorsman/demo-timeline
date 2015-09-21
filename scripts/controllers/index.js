@@ -4,7 +4,7 @@ angular.module('timelineApp.controllers', [])
 
       var postRef = WildDog.getDataRef('posts');
 
-      var loadAndWatchData = function() {
+      var loadAndWatchData = function () {
         postRef.orderByChild('time').on('value', function (ss) {
           var array = [];
           var val = ss.val();
@@ -23,15 +23,25 @@ angular.module('timelineApp.controllers', [])
       var authData = postRef.getAuth();
       console.log('authData:', authData);
 
-      if (authData) {
-        $scope.login = true;
-        //loadAndWatchData();
-      }
+      //if (authData) {
+      //  $scope.login = true;
+      //  loadAndWatchData();
+      //}
 
-      loadAndWatchData();
+      //loadAndWatchData();
+
+      postRef.onAuth(function (authData) {
+        if (authData) {
+          console.log(authData);
+          $timeout(function () {
+            $scope.login = true;
+            loadAndWatchData();
+          }, 0);
+        }
+      });
 
       $scope.authWithQQ = function () {
-        postRef.authWithOAuthPopup('qq', function (err, data) {
+        postRef.authWithOAuthRedirect('qq', function (err, data) {
           if (err) {
             console.log(err);
           }
@@ -40,10 +50,10 @@ angular.module('timelineApp.controllers', [])
 
           }
 
-          $scope.$apply(function() {
-            $scope.login = true;
-            loadAndWatchData();
-          });
+          //$scope.$apply(function() {
+          //  $scope.login = true;
+          //  loadAndWatchData();
+          //});
         });
       };
 
