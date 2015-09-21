@@ -1,8 +1,11 @@
 angular.module('timelineApp.controllers', [])
     .controller('PostCtrl', ['$scope', '$timeout', 'WildDog', 'QiNiu', function ($scope, $timeout, WildDog) {
       $scope.login = false;
+      $scope.text = '';
+      $scope.img = '';
+      $scope.posts = [];
 
-      var postRef = WildDog.getDataRef('posts2');
+      var postRef = WildDog.getDataRef('posts');
 
       var loadAndWatchData = function () {
         postRef.orderByChild('time').on('value', function (ss) {
@@ -20,8 +23,8 @@ angular.module('timelineApp.controllers', [])
         });
       };
 
-      var authData = postRef.getAuth();
-      console.log('authData:', authData);
+      //var authData = postRef.getAuth();
+      //console.log('authData:', authData);
 
       //if (authData) {
       //  $scope.login = true;
@@ -30,42 +33,38 @@ angular.module('timelineApp.controllers', [])
 
       //loadAndWatchData();
 
-      postRef.onAuth(function (authData) {
-        if (authData) {
-          console.log(authData);
-          $timeout(function () {
-            $scope.login = true;
-            loadAndWatchData();
-          }, 0);
-        }
-      });
-
-      $scope.logout = function() {
-        postRef.unauth();
-        $scope.login = false;
-      };
-
-      $scope.authWithQQ = function () {
-        postRef.authWithOAuthRedirect('qq', function (err, data) {
-          if (err) {
-            console.log(err);
-          }
-          if (data && data.token && data.token != '') {
-            console.log(data);
-
-          }
+      //postRef.onAuth(function (authData) {
+      //  if (authData) {
+      //    console.log(authData);
+      //    $timeout(function () {
+      //      $scope.login = true;
+      //      loadAndWatchData();
+      //    }, 0);
+      //  }
+      //});
+      //
+      //$scope.logout = function() {
+      //  postRef.unauth();
+      //  $scope.login = false;
+      //};
+      //
+      //$scope.authWithQQ = function () {
+      //  postRef.authWithOAuthRedirect('qq', function (err, data) {
+      //    if (err) {
+      //      console.log(err);
+      //    }
+      //    if (data && data.token && data.token != '') {
+      //      console.log(data);
+      //
+      //    }
 
           //$scope.$apply(function() {
           //  $scope.login = true;
           //  loadAndWatchData();
           //});
-        });
-      };
+        //});
+      //};
 
-      $scope.text = '';
-      $scope.img = '';
-
-      $scope.posts = [];
 
 
       $scope.addPost = function () {
@@ -95,4 +94,6 @@ angular.module('timelineApp.controllers', [])
           $scope.uploading = false;
         });
       });
+
+      loadAndWatchData();
     }]);
