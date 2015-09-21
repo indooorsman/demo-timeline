@@ -37,11 +37,13 @@ angular.module('timelineApp.controllers', [])
           }
           if (data && data.token && data.token != '') {
             console.log(data);
-            $scope.$apply(function() {
-              $scope.login = true;
-              loadAndWatchData();
-            });
+
           }
+
+          $scope.$apply(function() {
+            $scope.login = true;
+            loadAndWatchData();
+          });
         });
       };
 
