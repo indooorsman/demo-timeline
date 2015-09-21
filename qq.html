@@ -12,19 +12,21 @@
 </head>
 <body style="visibility: hidden">
 <div class="container" ng-controller="PostCtrl">
-    <div style="display: none">
+    <div ng-if="!login">
         <md-content>
             <md-card>
                 <md-card-content>
                     <h1 class="md-title">请先登录</h1>
                     <p layout="row">
-                        <md-button ng-click="authWithQQ()" class="md-raised md-primary" flex>用QQ登录</md-button>
+                        <md-button ng-click="authWithQQ()" class="md-raised md-primary" flex>
+                            <img src="styles/qq.png" class="btn-icon"/> 用QQ登录
+                        </md-button>
                     </p>
                 </md-card-content>
             </md-card>
         </md-content>
     </div>
-    <div>
+    <div ng-if="login">
 
         <form ng-submit="addPost()" layout="column" layout-padding="10px"
               style="background: rgba(255,255,255,.8);border-radius: 5px;margin-bottom: 10px;">

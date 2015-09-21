@@ -1,25 +1,55 @@
 angular.module('timelineApp.controllers', [])
     .controller('PostCtrl', ['$scope', '$timeout', 'WildDog', 'QiNiu', function ($scope, $timeout, WildDog, qiniu) {
+      $scope.login = false;
+
       var postRef = WildDog.getDataRef('posts');
+
+      var loadAndWatchData = function() {
+        postRef.orderByChild('time').on('value', function (ss) {
+          var array = [];
+          var val = ss.val();
+          for (var k in val) {
+            if (val.hasOwnProperty(k)) {
+              array.push(val[k]);
+            }
+          }
+          console.log('load ' + array.length + ' posts');
+          $timeout(function () {
+            $scope.posts = array.reverse();
+          }, 0);
+        });
+      };
+
+      var authData = postRef.getAuth();
+      console.log('authData:', authData);
+
+      if (authData) {
+        $scope.login = true;
+        //loadAndWatchData();
+      }
+
+      loadAndWatchData();
+
+      $scope.authWithQQ = function () {
+        postRef.authWithOAuthPopup('qq', function (err, data) {
+          if (err) {
+            console.log(err);
+          }
+          if (data && data.token && data.token != '') {
+            console.log(data);
+            $scope.$apply(function() {
+              $scope.login = true;
+              loadAndWatchData();
+            });
+          }
+        });
+      };
 
       $scope.text = '';
       $scope.img = '';
 
       $scope.posts = [];
 
-      postRef.orderByChild('time').on('value', function (ss) {
-        var array = [];
-        var val = ss.val();
-        for (var k in val) {
-          if (val.hasOwnProperty(k)) {
-            array.push(val[k]);
-          }
-        }
-        console.log(array);
-        $timeout(function () {
-          $scope.posts = array.reverse();
-        }, 0);
-      });
 
       $scope.addPost = function () {
         if ($scope.text.trim() == '' && $scope.img.trim() == '') {
@@ -37,7 +67,7 @@ angular.module('timelineApp.controllers', [])
       };
 
       $scope.$on('beforeUpload', function () {
-        $scope.$apply(function() {
+        $scope.$apply(function () {
           $scope.uploading = true;
         });
       });
