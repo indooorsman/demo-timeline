@@ -81,3 +81,7 @@ md-content {
     height: 20px;
     margin-right: 8px;
 }
+
+.login-form, .main-content {
+    /*display: none;*/
+}

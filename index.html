@@ -12,7 +12,7 @@
 </head>
 <body style="visibility: hidden">
 <div class="container" ng-controller="PostCtrl">
-    <div ng-show="!login">
+    <div class="login-form" ng-show="!login">
         <md-content>
             <md-card>
                 <md-card-content>
@@ -22,13 +22,13 @@
                             <img src="styles/qq.png" class="btn-icon"/>
                             用QQ登录
                         </md-button>-->
-                        <img ng-click="authWithQQ()" src="http://7xlotq.com1.z0.glb.clouddn.com/o_19vn79qlr19n1rjfgg91t1v11da9.png"/>
+                        <img style="display: block;margin: 0 auto;" ng-click="authWithQQ()" src="http://7xlotq.com1.z0.glb.clouddn.com/o_19vn79qlr19n1rjfgg91t1v11da9.png"/>
                     </p>
                 </md-card-content>
             </md-card>
         </md-content>
     </div>
-    <div ng-show="login">
+    <div class="main-content" ng-show="login">
 
         <ng-form layout="column"
               style="padding: 10px; background: rgba(255,255,255,.8);border-radius: 5px;margin-bottom: 10px;">

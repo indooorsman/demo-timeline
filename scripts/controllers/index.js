@@ -1,8 +1,8 @@
 angular.module('timelineApp.controllers', [])
-    .controller('PostCtrl', ['$scope', '$timeout', 'WildDog', 'QiNiu', function ($scope, $timeout, WildDog, qiniu) {
+    .controller('PostCtrl', ['$scope', '$timeout', 'WildDog', 'QiNiu', function ($scope, $timeout, WildDog) {
       $scope.login = false;
 
-      var postRef = WildDog.getDataRef('posts');
+      var postRef = WildDog.getDataRef('posts2');
 
       var loadAndWatchData = function () {
         postRef.orderByChild('time').on('value', function (ss) {
@@ -41,11 +41,8 @@ angular.module('timelineApp.controllers', [])
       });
 
       $scope.logout = function() {
-        postRef.unAuth(function() {
-          $timeout(function(){
-            $scope.login = false;
-          }, 0)
-        });
+        postRef.unauth();
+        $scope.login = false;
       };
 
       $scope.authWithQQ = function () {
