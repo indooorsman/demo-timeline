@@ -8,7 +8,7 @@ angular.module('timelineApp.controllers', [])
       var postRef = WildDog.getDataRef('posts');
 
       var loadAndWatchData = function () {
-        postRef.orderByChild('time').on('value', function (ss) {
+        postRef.orderByChild('time').limitToLast(10).on('value', function (ss) {
           var array = [];
           var val = ss.val();
           for (var k in val) {
@@ -22,50 +22,6 @@ angular.module('timelineApp.controllers', [])
           }, 0);
         });
       };
-
-      //var authData = postRef.getAuth();
-      //console.log('authData:', authData);
-
-      //if (authData) {
-      //  $scope.login = true;
-      //  loadAndWatchData();
-      //}
-
-      //loadAndWatchData();
-
-      //postRef.onAuth(function (authData) {
-      //  if (authData) {
-      //    console.log(authData);
-      //    $timeout(function () {
-      //      $scope.login = true;
-      //      loadAndWatchData();
-      //    }, 0);
-      //  }
-      //});
-      //
-      //$scope.logout = function() {
-      //  postRef.unauth();
-      //  $scope.login = false;
-      //};
-      //
-      //$scope.authWithQQ = function () {
-      //  postRef.authWithOAuthRedirect('qq', function (err, data) {
-      //    if (err) {
-      //      console.log(err);
-      //    }
-      //    if (data && data.token && data.token != '') {
-      //      console.log(data);
-      //
-      //    }
-
-          //$scope.$apply(function() {
-          //  $scope.login = true;
-          //  loadAndWatchData();
-          //});
-        //});
-      //};
-
-
 
       $scope.addPost = function () {
         if ($scope.text.trim() == '' && $scope.img.trim() == '') {
